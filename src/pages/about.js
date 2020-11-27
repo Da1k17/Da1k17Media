@@ -3,16 +3,16 @@ import Layout from "../components/layout"
 import {FontAwesomeIcon} from"@fortawesome/react-fontawesome"
 import {faIdBadge, faPenFancy, faAddressBook, faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons"
 import {faTwitterSquare, faFacebookSquare, faInstagramSquare} from "@fortawesome/free-brands-svg-icons"
-// import SEO from "../components/seo"
+import SEO from "../components/seo"
 
 const About = ({data, location}) => {
   return (
     <Layout>
-          {/* <SEO
+          <SEO
                   pagetitle="About Daiki"
                   pagedesc="Daikiの自己紹介です"
                   pagepath={location.pathname}
-          /> */}
+          />
           <article className="content">
                   <section className="container">
                         <h1 className="bar">
