@@ -1,9 +1,9 @@
 import React from "react"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import {FontAwesomeIcon} from"@fortawesome/react-fontawesome"
 import {faIdBadge, faPenFancy, faAddressBook, faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons"
 import {faTwitterSquare, faFacebookSquare, faInstagramSquare} from "@fortawesome/free-brands-svg-icons"
-import SEO from "../components/seo"
 
 const About = ({data, location}) => {
   return (

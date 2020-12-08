@@ -23,6 +23,13 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-transformer-json`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/pages/`,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -36,6 +43,22 @@ module.exports = {
         icon: `src/images/icon.png`,
       },
     },
-    `gatsby-plugin-offline`
+    `gatsby-plugin-offline`,
+
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: "6ek9nqaxhglc",
+        accessToken: "FS94TJWve5i8Le2nuoiqrYV1z34fsCZoE9ysPvgl1bM",
+      },
+    },
+    // {
+    //   resolve: `gatsby-source-contentful`,
+    //   options: {
+    //     spaceId: process.env.CONTENTFUL_SPACE_ID,
+    //     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    //     host: process.env.CONTENTFUL_HOST,
+    //   },
+    // },
   ],
 }
