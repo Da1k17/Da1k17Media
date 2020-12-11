@@ -4,18 +4,18 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-
+                      
 const blog = ({data, location, pageContext}) => {
       return (
             <Layout>
                   <SEO
-                  pagetitle="blog"
-                  pagedesc="Da1k17's Blog"
+                  pagetitle={`CATEGORY: ${pageContext.catname}`}
+                  pagedesc={`「${pageContext.catname}」カテゴリー記事です`}
                   pagepath={location.pathname}
                   />
                   <section className="content bloglist">
                   <div className="container">
-                        <h1 className="bar">RECENT POSTS</h1>
+                        <h1 className="bar">CATEGORY: {pageContext.catname}</h1>
                         <div className="posts">
                               {data.allContentfulBlogPost.edges.map(({node}) => (
                                     <article className="post" key={node.id}>
@@ -33,12 +33,12 @@ const blog = ({data, location, pageContext}) => {
                                ))}
                         </div>
                         <ul className="pagenation">
-                              {!pageContext.isFirst && (
+                              {!pageContext.isFisrt && (
                                     <li className="prev">
                                           <Link to={
                                                 pageContext.currentPage === 2
-                                                  ? `/blog/`
-                                                  : `/blog/${pageContext.currentPage - 1}/`
+                                                  ? `/cat/${pageContext.catslug}/`
+                                                  : `/cat/${pageContext.catslug}/${pageContext.currentPage - 1}/`
                                                 }
                                                 rel="prev"
                                           >
@@ -52,7 +52,7 @@ const blog = ({data, location, pageContext}) => {
                                     <li className="next">
                                     <Link
                                           to={
-                                                `/blog/${pageContext.currentPage + 1}/`
+                                                `/cat/${pageContext.catslug}/${pageContext.currentPage + 1}/`
                                           }
                                           rel="next"
                                     >
@@ -69,11 +69,12 @@ const blog = ({data, location, pageContext}) => {
 }
 
 export const query = graphql`
-query($skip: Int!, $limit: Int!) {
+query($catid: String!, $skip: Int!, $limit: Int!) {
       allContentfulBlogPost (
             sort: {order: DESC, fields: publishDate}
             skip: $skip
             limit: $limit
+            filter: {category: {elemMatch: {id: {eq: $catid }}}}
       ){
         edges {
           node {

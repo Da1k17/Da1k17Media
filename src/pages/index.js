@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 
@@ -10,7 +10,7 @@ const Home = ({data}) => {
       {/* ヒーローイメージ */}
       <section className="hero">
         <figure>
-        <Img fluid={data.file.childImageSharp.fluid} alt="ヒーローイメージ"  style={{height: "100%"}}/>
+        <Img fluid={data.hero.childImageSharp.fluid} alt="ヒーローイメージ"  style={{height: "100%"}}/>
         </figure>
         <div className="wave">
         <svg
@@ -36,28 +36,49 @@ const Home = ({data}) => {
           <div className="details">
             <div className="detail">
               <figure>
-                {/* <Img fluid={} alt=""/> */}
+                <Img fluid={data.about.childImageSharp.fluid} alt="Aboutページの画像"/>
               </figure>
-              <h3></h3>
-              <p></p>
+              <h3>About</h3>
+              <p>Aboutページでは、自分のスキルなどの紹介をしています</p>
             </div>
             <div className="detail">
               <figure>
-                {/* <Img fluid={} alt=""/> */}
+                <Img fluid={data.blog.childImageSharp.fluid} alt="Blogページの画像"/>
               </figure>
-              <h3></h3>
-              <p></p>
+              <h3>Blog</h3>
+              <p>Blogページでは、自らが作ったプロダクトなどの紹介をしています</p>
             </div>
             <div className="detail">
               <figure>
-                {/* <Img fluid={} alt=""/> */}
+                <Img fluid={data.contact.childImageSharp.fluid} alt="Contactページの画像"/>
               </figure>
-              <h3></h3>
-              <p></p>
+              <h3>Contact</h3>
+              <p>Contactページでは、仕事のお問い合わせなどを受け付けています</p>
             </div>
           </div>
-        </div>
-        </section>
+        <section>
+              <div className="container">
+              <h2 className="bar">Recent Posts</h2>
+                      <div className="posts">
+                            {data.allContentfulBlogPost.edges.map(({node}) => (
+                              <article className="post" key={node.id}>
+                                  <Link to={`/blog/post/${node.slug}/`}>
+                                  <figure>
+                                        <Img
+                                              fluid={node.eyecatch.fluid}
+                                              alt={node.eyecatch.description}
+                                              style={{height: "100%"}}
+                                              />
+                                  </figure>
+                                  <h3>{node.title}</h3>
+                                  </Link>
+                                  </article>
+                              ))}
+                      </div>
+                </div>
+          </section>
+          </div>
+          </section>
       </Layout>
 
 
@@ -65,11 +86,56 @@ const Home = ({data}) => {
 }
 
 export const query = graphql`
-  query {
-    file(relativePath: {eq: "hero.jpg"}) {
-      childImageSharp {
-        fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp
+query {
+  hero: file(relativePath: {eq: "hero.jpg"}) {
+    childImageSharp {
+      fluid(maxWidth: 1600) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
+    }
+  }
+about: file(relativePath: {eq: "about.png"}) {
+    childImageSharp {
+      fluid(maxWidth: 1600) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
+    }
+  }
+blog: file(relativePath: {eq: "blog.png"}) {
+    childImageSharp {
+      fluid(maxWidth: 1600) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
+    }
+  }
+contact: file(relativePath: {eq: "contact.png"}) {
+    childImageSharp {
+      fluid(maxWidth: 1600) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
+    }
+  }
+        allContentfulBlogPost (
+          sort: {order: DESC, fields: publishDate}
+          skip: 0
+          limit: 4
+    ){
+      edges {
+        node {
+          title
+          id
+          slug
+          eyecatch {
+            fluid(maxWidth: 573) {
+              base64
+              aspectRatio
+              src
+              srcWebp
+              srcSetWebp
+              sizes
+            }
+            description
+          }
         }
       }
     }

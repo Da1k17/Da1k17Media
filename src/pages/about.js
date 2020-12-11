@@ -38,7 +38,7 @@ const About = ({data, location}) => {
                                           <p><a href="" target="_blank"><FontAwesomeIcon icon={faInstagramSquare} /><span style={{paddingLeft: "10px"}}>Instagram</span></a></p>
                                           <p><a href="" target="_blank"><FontAwesomeIcon icon={faFacebookSquare} /><span style={{paddingLeft: "10px"}}>Facebook</span></a></p>
                                     </dd>
-                                    <dt className="bold">職業</dt>
+                                    <dt className="bold">肩書き</dt>
                                     <dd>
                                           <p>学生</p>
                                           <p>アクロバットパフォーマー</p>
@@ -47,7 +47,7 @@ const About = ({data, location}) => {
                                     <dd>茨城県つくば市</dd>
                               </dl>
                               <h3> 活動</h3>
-                              <p>早稲田大学に在学中からWEBエンジニアとして活動する</p>
+                              <p>早稲田大学３年生からエンジニアの学習を始める</p>
                         </div>
                         <div className="postbody">
                                     <h2>

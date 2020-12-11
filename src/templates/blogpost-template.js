@@ -61,7 +61,7 @@ const blogpost = ({data, pageContext, location}) => {
                               <ul>
                                     {data.contentfulBlogPost.category.map(cat => (
                                           <li className={cat.categorySlug} key={cat.id}>
-                                                {cat.category}
+                                                <Link to={`/cat/${cat.categorySlug}/`}>{cat.category}</Link>
                                           </li>
                                     ))}
                               </ul>
@@ -85,7 +85,7 @@ const blogpost = ({data, pageContext, location}) => {
 
                                     {pageContext.previous && (
                                           <li className="next">
-                                          <Link to={`/blog/post/${pageContext.previous.slug}`} rel="next">
+                                          <Link to={`/blog/post/${pageContext.previous.slug}/`} rel="next">
                                                 <span>{pageContext.previous.title}</span>
                                                 <FontAwesomeIcon icon={faChevronRight} />
                                           </Link>

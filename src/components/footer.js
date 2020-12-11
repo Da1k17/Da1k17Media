@@ -9,7 +9,7 @@ const footer = () => {
         <div className="container">
           <div className="site">
             <Link to={`/`}>
-              <p>product site</p>
+              <p>Portfolio</p>
             </Link>
           </div>
           <ul className="sns">
